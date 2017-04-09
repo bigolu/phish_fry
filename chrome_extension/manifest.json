@@ -1,0 +1,20 @@
+{
+  "manifest_version": 2,
+  "name": "phish_fry",
+  "description": "A chrome extension that detects phishing scams in emails.",
+  "short_name": "phish_fry – protect your email from phishing.",
+  "version": "0.0.1",
+  "content_scripts": [{
+    "css": ["css/bootstrap-theme.min.css", "css/bootstrap.min.css"],
+    "js": ["js/jquery-3.2.0.min.js", "js/content.js"],
+    "matches": ["https://mail.google.com/mail/*"]
+  }],
+  "background": {
+    "scripts": ["js/jquery-3.2.0.min.js", "js/background.js"]
+  },
+  "permissions": [
+    "http://*/",
+    "https://*/",
+    "tabs"
+  ]
+}

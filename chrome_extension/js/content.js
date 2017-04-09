@@ -11,9 +11,6 @@ function injectButton(){
   rawEmail.append(button);
 }
 
-/*
- * //TODO: describe object returned
- */
 function parseEmailBody(){
   var emailContents = {
     "emailBody": null,

@@ -1,0 +1,20 @@
+1. spelling mistakes
+2. salutation
+3. personal credentials
+4. threatening language
+5. check the signature
+6. attachments if not friend
+7. reference links to from email
+8. domain name on the page
+9. redirect to different site
+10. hyperlink doesnt match actual link
+11. gov or edu is clear
+12. form tag
+13. short emails not in list
+
+- hyperlink not in list
+
+FSA
+
+1. cleanup
+

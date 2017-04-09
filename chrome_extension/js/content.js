@@ -5,7 +5,7 @@ function injectButton(){
   var rawEmail = $(possibleEmailDivs[possibleEmailDivs.length - 1]);
 
   var button = $(
-    "<div> <p> biggie is here </p> </div>"
+    "<button type=\"button\" class=\"btn btn-info\"> analyze </button>"
   );
   button.on('click', analyze);
   rawEmail.append(button);

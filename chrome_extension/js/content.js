@@ -1,4 +1,4 @@
-var PHISHING_REPORT_ENDPOINT = null;
+var PHISHING_REPORT_ENDPOINT = "https://5cc21b87.ngrok.io/phish";
 
 function injectButton(){
   var possibleEmailDivs = $("div[dir='ltr']");
@@ -13,9 +13,9 @@ function injectButton(){
 
 function parseEmailBody(){
   var emailContents = {
-    "emailBody": null,
-    "links": [],
-    "hyperlinks": {}
+    emailBody: null,
+    links: [],
+    hyperlinks: {}
   };
   var possibleEmailDivs = $("div[dir='ltr']");
   var rawEmail = $(possibleEmailDivs[possibleEmailDivs.length - 1]);
@@ -43,22 +43,24 @@ function parseEmailBody(){
   return emailContents;
 }
 
-function getPhishingReport(emailContents){
-  var xhr = new XMLHttpRequest();
+function showReport(reportData){
 
-  xhr.open("POST", PHISHING_REPORT_ENDPOINT, true);
-  xhr.setRequestHeader('Content-Type', 'application/json');
-  xhr.onreadystatechange = function() {
-    if (xhr.readyState == 4) {
-      alert(xhr.responseText);
-    }
-  }
-  //xhr.send(JSON.stringify(emailContents));
+}
+
+function getPhishingReport(emailContents){
+  $.ajax({
+    url: PHISHING_REPORT_ENDPOINT,
+    type: "POST",
+    data: JSON.stringify(emailContents),
+    contentType: "application/json; charset=utf-8",
+    dataType: "json",
+    success: showReport
+  });
 }
 
 function analyze(){
   var emailContents = parseEmailBody();
-  var phishingReport = getPhishingReport();
+  var phishingReport = getPhishingReport(emailContents);
 }
 
 chrome.runtime.onMessage.addListener(function(msg){

@@ -1,14 +1,17 @@
 var PHISHING_REPORT_ENDPOINT = "https://5cc21b87.ngrok.io/phish";
+var BUTTON;
+var SCORE;
+var REPORT;
 
 function injectButton(){
   var possibleEmailDivs = $("div[dir='ltr']");
   var rawEmail = $(possibleEmailDivs[possibleEmailDivs.length - 1]);
 
-  var button = $(
-    "<button type=\"button\" class=\"btn btn-info\"> analyze </button>"
+  BUTTON = $(
+    "<br><br><button type=\"button\" class=\"btn btn-info\"> analyze </button>"
   );
-  button.on('click', analyze);
-  rawEmail.append(button);
+  BUTTON.on('click', analyze);
+  rawEmail.append(BUTTON);
 }
 
 function parseEmailBody(){
@@ -43,8 +46,16 @@ function parseEmailBody(){
   return emailContents;
 }
 
-function showReport(reportData){
+function showReport(){
+}
 
+function showScore(reportData){
+  SCORE = reportData.Score;
+  REPORT = reportData.Report;
+
+  BUTTON.text(SCORE);
+  BUTTON.removeClass('btn-info').addClass((SCORE < 100) ? 'btn-success' : 'btn-danger');
+  BUTTON.on('click', showReport);
 }
 
 function getPhishingReport(emailContents){
@@ -54,7 +65,7 @@ function getPhishingReport(emailContents){
     data: JSON.stringify(emailContents),
     contentType: "application/json; charset=utf-8",
     dataType: "json",
-    success: showReport
+    success: showScore
   });
 }
 

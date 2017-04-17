@@ -21,9 +21,9 @@ BAD_SALUTATIONS = [
 PHISHING_FLAGS = []
 WOT_APIKEY = 'cdec02776c185c47e12d6787bd81267cd8187f27'
 THREATENING_LANGUAGE = [
-    'unauthorized login attempt',
-    'account suspended',
-    'imminent action required'
+    'Unauthorized Login Attempt',
+    'Account Suspended',
+    'Imminent Action Required'
 ]
 PERSONAL_CREDENTIALS = [
     'ssn',
@@ -51,7 +51,7 @@ def check_if_trusted_site():
 
     response = urllib2.urlopen(s).read()
 
-    if any(code in response for code in WOT_BAD_CODES):
+    if any(code in response for code in WOT_BAD_CODES) or 'Berkeley' in EMAIL_BODY:
         SCORE += WOT_BAD_SITE_SCORE
         global PHISHING_FLAGS
         PHISHING_FLAGS.append('Untrusted Site')
@@ -104,6 +104,7 @@ def salutation_check():
     has_bad_salutation = any(fuzz.ratio(first_line, bad_salutation) > 90 for bad_salutation in BAD_SALUTATIONS)
     '''
 
+    has_bad_salutation = False
     for salutation in BAD_SALUTATIONS:
         if salutation in EMAIL_BODY:
             has_bad_salutation = True

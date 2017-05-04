@@ -18,3 +18,4 @@ FSA
 
 1. cleanup
 
+*keep list of words like google, amazon, etc.. and search email text and links for it. if one of those words are found and the link isnt trusted, thats bad.
